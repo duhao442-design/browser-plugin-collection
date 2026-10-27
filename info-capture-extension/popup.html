@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 520px;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 14px;
+      background: #f8f9fa;
+    }
+    h3 {
+      margin-bottom: 12px;
+      color: #333;
+      font-size: 16px;
+    }
+    .field {
+      margin-bottom: 10px;
+    }
+    .field label {
+      display: block;
+      font-weight: 600;
+      color: #333;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .field input {
+      width: 100%;
+      padding: 7px 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: inherit;
+      background: #fff;
+    }
+    .field textarea {
+      width: 100%;
+      padding: 7px 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: monospace;
+      word-break: break-all;
+      resize: vertical;
+      background: #fff;
+    }
+    .field input:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: #4a90d9;
+      box-shadow: 0 0 0 2px rgba(74, 144, 217, 0.2);
+    }
+    .result-area {
+      margin-top: 12px;
+    }
+    .result-area label {
+      display: block;
+      font-weight: 600;
+      color: #333;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .result-area textarea {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 12px;
+      resize: vertical;
+      font-family: monospace;
+      word-break: break-all;
+    }
+    .result-area textarea:focus {
+      outline: none;
+      border-color: #4a90d9;
+    }
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+      color: #fff;
+    }
+    .btn-capture { background: #e94560; }
+    .btn-capture:hover { background: #c73850; }
+    .btn-copy { background: #4a90d9; }
+    .btn-copy:hover { background: #3a7bc8; }
+    .hint {
+      margin-top: 10px;
+      color: #888;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .hint b { color: #555; }
+  </style>
+</head>
+<body>
+  <h3>关键信息捕获</h3>
+
+  <!-- 四个关键信息字段，均可手动修改 -->
+  <div class="field">
+    <label>1. 题目ID</label>
+    <input type="text" id="fieldId" placeholder="自动捕获，可手动修改" autocomplete="off">
+  </div>
+  <div class="field">
+    <label>2. 队列名称</label>
+    <input type="text" id="fieldQueue" placeholder="自动捕获，可手动修改" autocomplete="off">
+  </div>
+  <div class="field">
+    <label>3. 题目链接</label>
+    <input type="text" id="fieldLink" placeholder="自动捕获，可手动修改" autocomplete="off">
+  </div>
+  <div class="field">
+    <label>4. alloc镜像 image（多条时每行一条）</label>
+    <textarea id="fieldImage" rows="2" placeholder="自动捕获，可手动修改" autocomplete="off"></textarea>
+  </div>
+
+  <!-- 合并结果：四个字段以制表符分隔 -->
+  <div class="result-area">
+    <label>合并结果（制表符分隔）</label>
+    <textarea id="resultText" readonly></textarea>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-capture" id="captureBtn">捕获关键信息</button>
+    <button class="btn btn-copy" id="copyBtn">复制结果</button>
+  </div>
+
+  <p class="hint">
+    <b>捕获规则：</b>题目ID取【题目 ID：】标签的兄弟 span 值；队列名称取 task-title 类文本前2-3位；<br>
+    题目链接取 force-icon-link 图标（点击自动复制）的链接；alloc镜像从 sandbox-render-error 的 div 文本中提取 image 值。
+  </p>
+
+  <script src="popup.js"></script>
+</body>
+</html>

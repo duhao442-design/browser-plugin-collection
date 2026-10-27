@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 400px;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 14px;
+      background: #f8f9fa;
+    }
+    h3 {
+      margin-bottom: 12px;
+      color: #333;
+      font-size: 16px;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 13px;
+      resize: vertical;
+      font-family: inherit;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: #4a90d9;
+      box-shadow: 0 0 0 2px rgba(74, 144, 217, 0.2);
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      margin-top: 12px;
+      padding: 10px;
+      background: #4a90d9;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #3a7bc8; }
+    .btn:disabled { background: #aaa; cursor: not-allowed; }
+    .hint {
+      margin-top: 8px;
+      color: #888;
+      font-size: 12px;
+    }
+    .resume-box {
+      display: none;
+      padding: 14px;
+      margin-bottom: 12px;
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      border-radius: 8px;
+    }
+    .resume-box .resume-title {
+      font-weight: 600;
+      color: #2e7d32;
+      margin-bottom: 8px;
+    }
+    .resume-box .resume-info {
+      color: #555;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    .resume-box .btn-resume {
+      display: inline-block;
+      padding: 8px 20px;
+      background: #2e7d32;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      margin-right: 8px;
+      transition: background 0.2s;
+    }
+    .resume-box .btn-resume:hover { background: #1b5e20; }
+    .resume-box .btn-discard {
+      display: inline-block;
+      padding: 8px 20px;
+      background: #c62828;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .resume-box .btn-discard:hover { background: #b71c1c; }
+    .mode-group {
+      margin-bottom: 12px;
+      padding: 10px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+    .mode-group .mode-label {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+      display: block;
+      font-size: 13px;
+    }
+    .mode-group label {
+      display: inline-block;
+      margin-right: 16px;
+      cursor: pointer;
+      font-size: 13px;
+      color: #555;
+    }
+    .mode-group input[type="radio"] {
+      margin-right: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h3>Check List Checker</h3>
+
+  <!-- 继续做题提示 -->
+  <div class="resume-box" id="resumeBox">
+    <div class="resume-title">检测到未完成的检查</div>
+    <div class="resume-info" id="resumeInfo">加载中...</div>
+    <button class="btn-resume" id="resumeBtn">继续做题</button>
+    <button class="btn-discard" id="discardBtn">放弃并重新开始</button>
+  </div>
+
+  <!-- 新建做题 -->
+  <div id="newCheckArea">
+    <div class="mode-group">
+      <span class="mode-label">检查模式</span>
+      <label><input type="radio" name="checkMode" value="single" checked> 单条check</label>
+      <label><input type="radio" name="checkMode" value="left"> 左边check</label>
+      <label><input type="radio" name="checkMode" value="right"> 右边check</label>
+    </div>
+    <textarea id="inputText" placeholder="请输入列表数据，每条用换行符分隔...&#10;&#10;示例：&#10;第一条内容&#10;第二条内容&#10;&#10;第三条内容"></textarea>
+    <p class="hint">多个空行会被自动合并为一条分隔</p>
+    <button class="btn" id="startBtn">开始检查</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

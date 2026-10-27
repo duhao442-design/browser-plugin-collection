@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "晓天HTML脚本4.5",
+  "version": "4.5.0",
+  "version_name": "4.5",
+  "description": "晓天版本4.5，对抢题效率进一步提高了",
+  "permissions": ["storage", "alarms", "scripting", "tabs"],
+  "host_permissions": [
+    "https://8.135.29.12/*",
+    "https://www.skyvendorise.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "sandbox": {
+    "pages": ["c-sandbox.html"]
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'",
+    "sandbox": "sandbox allow-scripts; script-src 'self' 'unsafe-eval'; object-src 'none'; connect-src 'none'"
+  },
+  "action": {
+    "default_title": "显示或隐藏晓天HTML脚本4.5"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.skyvendorise.com/skyvendor/dashboard/annotation/acceptance*"],
+      "js": ["config.js", "custom-sound.js", "content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["qiangdao_tile.mp3", "c-sandbox.html", "c-sandbox-loader.js"],
+      "matches": ["https://www.skyvendorise.com/*"]
+    }
+  ]
+}
